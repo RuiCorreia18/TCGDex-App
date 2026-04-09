@@ -10,7 +10,7 @@ interface TCGDexApiService {
 
     @GET("cards")
     suspend fun searchCards(
-        @Query("name") name: String?,
+        @Query("name") name: String? = null,
     ): List<CardDto>
 
     /**

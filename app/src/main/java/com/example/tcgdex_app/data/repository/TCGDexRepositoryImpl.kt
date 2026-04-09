@@ -1,6 +1,7 @@
 package com.example.tcgdex_app.data.repository
 
 import com.example.tcgdex_app.data.remote.api.TCGDexApiService
+import com.example.tcgdex_app.data.toDomainModel
 import com.example.tcgdex_app.domain.TCGDexRepository
 import com.example.tcgdex_app.domain.model.Card
 import com.example.tcgdex_app.domain.model.CardDetails
@@ -10,12 +11,13 @@ class TCGDexRepositoryImpl @Inject constructor(
     private val api: TCGDexApiService
 ): TCGDexRepository{
     override suspend fun searchCards(name: String?): List<Card> {
-        TODO("Not yet implemented")
+        return api.searchCards(name = name)
+            .map { it.toDomainModel() }
     }
 
     override suspend fun getCardDetails(
         id: String
     ): CardDetails {
-        TODO("Not yet implemented")
+        return api.getCardDetails(id = id).toDomainModel()
     }
 }
