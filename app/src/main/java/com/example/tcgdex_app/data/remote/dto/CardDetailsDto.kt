@@ -1,8 +1,16 @@
 package com.example.tcgdex_app.data.remote.dto
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.jsonPrimitive
 
+@Serializable
 data class CardDetailsDto(
     @SerialName("id") val id: String,
     @SerialName("name") val name: String,
@@ -21,6 +29,7 @@ data class CardDetailsDto(
     @SerialName("retreat") val retreat: Int? = null,
     )
 
+@Serializable
 data class SetDetailsDto(
     @SerialName("id") val id: String,
     @SerialName("name") val name: String,
@@ -30,12 +39,26 @@ data class SetDetailsDto(
 data class AttackDto(
     @SerialName("name") val name: String,
     @SerialName("cost") val cost: List<String> = emptyList(),
-    @SerialName("damage") val damage: Int? = null,
+    @Serializable(with = FlexibleDamageSerializer::class)
+    @SerialName("damage") val damage: String? = null,
     @SerialName("effect") val effect: String? = null,
 )
 
 @Serializable
 data class WeaknessDto(
-    @SerialName("type") val type: String,
-    @SerialName("value") val value: String,
+    @SerialName("type") val type: String? = null,
+    @SerialName("value") val value: String? = null,
 )
+
+object FlexibleDamageSerializer : KSerializer<String?> {
+    override val descriptor = PrimitiveSerialDescriptor("FlexibleDamage", PrimitiveKind.STRING)
+
+    override fun serialize(encoder: Encoder, value: String?) {
+        if (value != null) encoder.encodeString(value) else encoder.encodeNull()
+    }
+
+    override fun deserialize(decoder: Decoder): String? {
+        val json = (decoder as JsonDecoder).decodeJsonElement().jsonPrimitive
+        return json.content
+    }
+}

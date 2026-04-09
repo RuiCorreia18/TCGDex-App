@@ -21,11 +21,11 @@ data class CardDetails(
 data class Attack(
     val name: String,
     val cost: List<String> = emptyList(),
-    val damage: Int? = null,
+    val damage: String,
     val effect: String? = null,
 )
 
 data class Weakness(
     val type: String,
-    val value: String,
+    val value: String = "",
 )

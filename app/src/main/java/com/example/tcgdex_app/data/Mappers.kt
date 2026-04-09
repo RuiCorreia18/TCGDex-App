@@ -31,7 +31,7 @@ fun CardDetailsDto.toDomainModel(): CardDetails {
         description = description,
         stage = stage,
         attacks = attacks.map { it.toDomainModel() },
-        weaknesses = weaknesses.map { it.toDomainModel() },
+        weaknesses = weaknesses.mapNotNull { it.toDomainModel() },
         retreat = retreat,
 
     )
@@ -41,14 +41,15 @@ private fun AttackDto.toDomainModel(): Attack {
     return Attack(
         name = name,
         cost = cost,
-        damage = damage,
+        damage = damage.orEmpty(),
         effect = effect,
     )
 }
 
-private fun WeaknessDto.toDomainModel(): Weakness {
+private fun WeaknessDto.toDomainModel(): Weakness? {
+    val type = type ?: return null
     return Weakness(
         type = type,
-        value = value,
+        value = value.orEmpty(),
     )
 }
