@@ -21,7 +21,7 @@ data class CardDetails(
 data class Attack(
     val name: String,
     val cost: List<String> = emptyList(),
-    val damage: String,
+    val damage: String = "",
     val effect: String? = null,
 )
 

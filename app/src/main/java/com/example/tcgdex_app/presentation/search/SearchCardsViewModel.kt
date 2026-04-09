@@ -6,6 +6,7 @@ import com.example.tcgdex_app.domain.usecase.SearchCardsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +18,7 @@ class SearchCardsViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(SearchCardUiState())
-    val uiState: StateFlow<SearchCardUiState> = _uiState
+    val uiState: StateFlow<SearchCardUiState> = _uiState.asStateFlow()
 
     init {
         searchCards(null)
