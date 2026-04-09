@@ -120,6 +120,12 @@ private fun CardDetailsContent(
             }
         }
 
+        if (card.abilities.isNotEmpty()) {
+            item {
+                AbilitiesSection(abilities = card.abilities)
+            }
+        }
+
         if (card.attacks.isNotEmpty()) {
             item {
                 AttacksSection(attacks = card.attacks)
@@ -262,6 +268,39 @@ private fun DescriptionSection(description: String) {
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+    }
+}
+
+@Composable
+private fun AbilitiesSection(abilities: List<Ability>) {
+    SectionCard(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+        SectionTitle(text = "Abilities")
+        Spacer(Modifier.height(8.dp))
+        abilities.forEachIndexed { index, ability ->
+            AbilityItem(ability = ability)
+            if (index < abilities.lastIndex) {
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+            }
+        }
+    }
+}
+
+@Composable
+private fun AbilityItem(ability: Ability) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = ability.name,
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Bold,
+        )
+        if (!ability.effect.isNullOrBlank()) {
+            Spacer(Modifier.height(4.dp))
+            Text(
+                text = ability.effect,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
     }
 }
 

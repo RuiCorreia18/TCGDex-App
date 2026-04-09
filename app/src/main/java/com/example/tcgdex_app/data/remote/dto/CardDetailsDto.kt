@@ -24,6 +24,7 @@ data class CardDetailsDto(
     @SerialName("evolveFrom") val evolveFrom: String? = null,
     @SerialName("description") val description: String? = null,
     @SerialName("stage") val stage: String? = null,
+    @SerialName("abilities") val abilities: List<AbilityDto> = emptyList(),
     @SerialName("attacks") val attacks: List<AttackDto> = emptyList(),
     @SerialName("weaknesses") val weaknesses: List<WeaknessDto> = emptyList(),
     @SerialName("retreat") val retreat: Int? = null,
@@ -33,6 +34,13 @@ data class CardDetailsDto(
 data class SetDetailsDto(
     @SerialName("id") val id: String,
     @SerialName("name") val name: String,
+)
+
+@Serializable
+data class AbilityDto(
+    @SerialName("type") val type: String? = null,
+    @SerialName("name") val name: String? = null,
+    @SerialName("effect") val effect: String? = null,
 )
 
 @Serializable

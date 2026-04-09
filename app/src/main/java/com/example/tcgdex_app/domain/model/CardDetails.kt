@@ -13,9 +13,16 @@ data class CardDetails(
     val evolveFrom: String? = null,
     val description: String? = null,
     val stage: String? = null,
+    val abilities: List<Ability> = emptyList(),
     val attacks: List<Attack> = emptyList(),
     val weaknesses: List<Weakness> = emptyList(),
     val retreat: Int? = null,
+)
+
+data class Ability(
+    val type: String,
+    val name: String,
+    val effect: String?,
 )
 
 data class Attack(

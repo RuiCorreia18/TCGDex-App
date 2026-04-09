@@ -1,9 +1,11 @@
 package com.example.tcgdex_app.data
 
+import com.example.tcgdex_app.data.remote.dto.AbilityDto
 import com.example.tcgdex_app.data.remote.dto.AttackDto
 import com.example.tcgdex_app.data.remote.dto.CardDetailsDto
 import com.example.tcgdex_app.data.remote.dto.CardDto
 import com.example.tcgdex_app.data.remote.dto.WeaknessDto
+import com.example.tcgdex_app.domain.model.Ability
 import com.example.tcgdex_app.domain.model.Attack
 import com.example.tcgdex_app.domain.model.Card
 import com.example.tcgdex_app.domain.model.CardDetails
@@ -30,10 +32,22 @@ fun CardDetailsDto.toDomainModel(): CardDetails {
         evolveFrom = evolveFrom,
         description = description,
         stage = stage,
+        abilities = abilities.mapNotNull { it.toDomainModel() },
         attacks = attacks.map { it.toDomainModel() },
         weaknesses = weaknesses.mapNotNull { it.toDomainModel() },
         retreat = retreat,
 
+    )
+}
+
+private fun AbilityDto.toDomainModel(): Ability? {
+    val name = name ?: return null
+    val type = type ?: return null
+
+    return Ability(
+        type = type,
+        name = name,
+        effect = effect,
     )
 }
 
