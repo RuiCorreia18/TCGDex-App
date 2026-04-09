@@ -13,14 +13,14 @@ fun CardDto.toDomainModel(): Card {
     return Card(
         id = id,
         name = name,
-        imageUrl = image.orEmpty(),
+        imageUrl = image?.let { "$it/low.jpg" }.orEmpty(),
     )
 }
 fun CardDetailsDto.toDomainModel(): CardDetails {
     return CardDetails(
         id = id,
         name = name,
-        imageUrl = image.orEmpty(),
+        imageUrl = image?.let { "$it/high.jpg" }.orEmpty(),
         category = category,
         illustrator = illustrator.orEmpty(),
         rarity = rarity.orEmpty(),
