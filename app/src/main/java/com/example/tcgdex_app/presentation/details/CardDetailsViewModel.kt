@@ -1,14 +1,9 @@
 package com.example.tcgdex_app.presentation.details
 
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.tcgdex_app.domain.usecase.GetCardDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
@@ -17,7 +12,7 @@ import kotlin.coroutines.cancellation.CancellationException
 class CardDetailsViewModel @Inject constructor(
     private val getCardDetailsUseCase: GetCardDetailsUseCase,
     savedStateHandle: SavedStateHandle,
-): ViewModel() {
+) : ViewModel() {
 
 
     private val cardId: String = checkNotNull(savedStateHandle["id"])
@@ -26,13 +21,7 @@ class CardDetailsViewModel @Inject constructor(
     val uiState: StateFlow<CardDetailsUiState> = _uiState.asStateFlow()
 
     init {
-        if (cardId.isBlank()) {
-            _uiState.update {
-                it.copy(error = "Missing card id")
-            }
-        } else {
-            loadCardDetails(cardId)
-        }
+        loadCardDetails(cardId)
     }
 
     fun retry() {
@@ -41,7 +30,7 @@ class CardDetailsViewModel @Inject constructor(
 
     private fun loadCardDetails(id: String) {
         viewModelScope.launch {
-            _uiState.update { it.copy( isLoading = true, error = null) }
+            _uiState.update { it.copy(isLoading = true, error = null) }
 
             try {
                 val cardDetails = getCardDetailsUseCase(id)

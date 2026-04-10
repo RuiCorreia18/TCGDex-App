@@ -6,8 +6,11 @@ import com.example.tcgdex_app.data.repository.TCGDexRepositoryImpl
 import com.example.tcgdex_app.domain.TCGDexRepository
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
@@ -24,4 +27,10 @@ abstract class AppModule {
     abstract fun bindCardRemoteDataSource(
         impl: RemoteDataSourceImpl
     ): RemoteDataSource
+
+    companion object {
+        @Provides
+        @Singleton
+        fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+    }
 }
