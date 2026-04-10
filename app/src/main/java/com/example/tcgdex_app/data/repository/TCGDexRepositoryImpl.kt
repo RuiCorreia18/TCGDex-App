@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class TCGDexRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource
-): TCGDexRepository{
+) : TCGDexRepository {
     override suspend fun searchCards(name: String?): List<Card> {
         return remoteDataSource.searchCards(name = name)
             .map { it.toDomainModel() }

@@ -4,9 +4,7 @@ import com.example.tcgdex_app.data.remote.datasource.RemoteDataSource
 import com.example.tcgdex_app.data.remote.datasource.RemoteDataSourceImpl
 import com.example.tcgdex_app.data.repository.TCGDexRepositoryImpl
 import com.example.tcgdex_app.domain.TCGDexRepository
-import dagger.Binds
-import dagger.Module
-import dagger.Provides
+import dagger.*
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher

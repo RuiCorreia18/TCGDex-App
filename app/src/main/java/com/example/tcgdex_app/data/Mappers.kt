@@ -1,15 +1,7 @@
 package com.example.tcgdex_app.data
 
-import com.example.tcgdex_app.data.remote.dto.AbilityDto
-import com.example.tcgdex_app.data.remote.dto.AttackDto
-import com.example.tcgdex_app.data.remote.dto.CardDetailsDto
-import com.example.tcgdex_app.data.remote.dto.CardDto
-import com.example.tcgdex_app.data.remote.dto.WeaknessDto
-import com.example.tcgdex_app.domain.model.Ability
-import com.example.tcgdex_app.domain.model.Attack
-import com.example.tcgdex_app.domain.model.Card
-import com.example.tcgdex_app.domain.model.CardDetails
-import com.example.tcgdex_app.domain.model.Weakness
+import com.example.tcgdex_app.data.remote.dto.*
+import com.example.tcgdex_app.domain.model.*
 
 fun CardDto.toDomainModel(): Card {
     return Card(
@@ -18,6 +10,7 @@ fun CardDto.toDomainModel(): Card {
         imageUrl = image?.let { "$it/low.jpg" }.orEmpty(),
     )
 }
+
 fun CardDetailsDto.toDomainModel(): CardDetails {
     return CardDetails(
         id = id,
@@ -36,7 +29,6 @@ fun CardDetailsDto.toDomainModel(): CardDetails {
         attacks = attacks.map { it.toDomainModel() },
         weaknesses = weaknesses.mapNotNull { it.toDomainModel() },
         retreat = retreat,
-
     )
 }
 

@@ -6,8 +6,8 @@ import javax.inject.Inject
 
 class GetCardDetailsUseCase @Inject constructor(
     private val repository: TCGDexRepository
-){
-    suspend operator fun invoke(id: String): CardDetails{
+) {
+    suspend operator fun invoke(id: String): CardDetails {
         return repository.getCardDetails(id)
     }
 }

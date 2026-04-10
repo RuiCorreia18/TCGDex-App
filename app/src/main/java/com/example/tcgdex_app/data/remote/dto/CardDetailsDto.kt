@@ -1,8 +1,6 @@
 package com.example.tcgdex_app.data.remote.dto
 
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
@@ -28,7 +26,7 @@ data class CardDetailsDto(
     @SerialName("attacks") val attacks: List<AttackDto> = emptyList(),
     @SerialName("weaknesses") val weaknesses: List<WeaknessDto> = emptyList(),
     @SerialName("retreat") val retreat: Int? = null,
-    )
+)
 
 @Serializable
 data class SetDetailsDto(

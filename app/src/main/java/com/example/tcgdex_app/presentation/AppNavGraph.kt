@@ -1,12 +1,8 @@
 package com.example.tcgdex_app.presentation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.*
+import androidx.navigation.compose.*
 import com.example.tcgdex_app.presentation.details.CardDetailsRoute
 import com.example.tcgdex_app.presentation.search.SearchCardsRoute
 
@@ -31,7 +27,7 @@ fun AppNavGraph(
         composable(Routes.SEARCH) {
             SearchCardsRoute(
                 onCardClick = { id ->
-                    navController.navigate(Routes.details(id)){
+                    navController.navigate(Routes.details(id)) {
                         launchSingleTop = true
                     }
                 }
