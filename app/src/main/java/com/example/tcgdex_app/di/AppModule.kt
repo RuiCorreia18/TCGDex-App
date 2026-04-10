@@ -1,5 +1,7 @@
 package com.example.tcgdex_app.di
 
+import com.example.tcgdex_app.data.remote.datasource.RemoteDataSource
+import com.example.tcgdex_app.data.remote.datasource.RemoteDataSourceImpl
 import com.example.tcgdex_app.data.repository.TCGDexRepositoryImpl
 import com.example.tcgdex_app.domain.TCGDexRepository
 import dagger.Binds
@@ -16,4 +18,10 @@ abstract class AppModule {
     abstract fun bindTCGDexRepository(
         impl: TCGDexRepositoryImpl,
     ): TCGDexRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCardRemoteDataSource(
+        impl: RemoteDataSourceImpl
+    ): RemoteDataSource
 }
